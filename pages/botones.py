@@ -37,8 +37,8 @@ if st.button('ON'):
     client1= paho.Client("AlejoInterfaces")                           
     client1.on_publish = on_publish                          
     client1.connect(broker,port)  
-    message =json.dumps({"AlejoCerradura":act1})
-    ret= client1.publish("cmqtt_s", message)
+    message =json.dumps({"gesto":act1})
+    ret= client1.publish("AlejoCerradura", message)
  
     #client1.subscribe("Sensores")
     
