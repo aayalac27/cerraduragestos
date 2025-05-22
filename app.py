@@ -25,6 +25,18 @@ st.markdown("""
             text-align: center;
             margin-bottom: 20px;
         }
+        .gesture-box {
+            border: 2px solid #2C5364;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 10px;
+            background-color: #f0f4f8;
+            text-align: center;
+            font-size: 18px;
+        }
+        .gesture-emoji {
+            font-size: 40px;
+        }
         .stButton>button {
             background-color: #2C5364;
             color: white;
@@ -32,17 +44,20 @@ st.markdown("""
             border-radius: 10px;
             padding: 10px 20px;
         }
-        .stHeader {
-            color: #2C5364;
-            font-weight: bold;
-            font-size: 30px;
-        }
     </style>
 """, unsafe_allow_html=True)
 
 # ---------- TÍTULO Y INTRODUCCIÓN ----------
 st.markdown('<div class="main-title">Sistema de Cerradura Inteligente para Hogares</div>', unsafe_allow_html=True)
 st.markdown('<div class="intro-text">Este sistema utiliza visión por computadora y aprendizaje automático para abrir o cerrar tu puerta con gestos. ¡Toma una foto para comenzar!</div>', unsafe_allow_html=True)
+
+# ---------- GESTOS EXPLICATIVOS ----------
+col1, col2 = st.columns(2)
+with col1:
+    st.markdown('<div class="gesture-box"><div class="gesture-emoji">✊</div><br>Gesto para <strong>cerrar</strong> la cerradura</div>', unsafe_allow_html=True)
+
+with col2:
+    st.markdown('<div class="gesture-box"><div class="gesture-emoji">🤚</div><br>Gesto para <strong>abrir</strong> la cerradura</div>', unsafe_allow_html=True)
 
 # ---------- MQTT Y MODELO ----------
 def on_publish(client, userdata, result):
@@ -77,6 +92,7 @@ if img_file_buffer is not None:
 
     prediction = model.predict(data)
     print(prediction)
+    
     if prediction[0][0] > 0.3:
         st.header("🔓 Abriendo Cerradura")
         client1.publish("AlejoCerradura", json.dumps({"gesto": "Abre"}), qos=0, retain=False)
