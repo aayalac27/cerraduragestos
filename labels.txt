@@ -1,2 +1,2 @@
-0 cerrar
-1 abrir
+0 abrir
+1 cerrar
