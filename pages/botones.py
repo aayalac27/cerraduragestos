@@ -73,24 +73,27 @@ client1 = paho.Client("AlejoInterfaces")
 client1.on_message = on_message
 
 # ---------- BOTONES DE CONTROL ----------
-col1, col2 = st.columns(2)
+col_left, col_center, col_right = st.columns([1,2,1])
 
-with col1:
-    if st.button('ENCENDER LUZ 🔆'):
-        action = "encender"
-        client1 = paho.Client("AlejoInterfaces")
-        client1.on_publish = on_publish
-        client1.connect(broker, port)
-        message = json.dumps({"gesto": action})
-        client1.publish("AlejoCerradura", message)
-        st.success("Luz encendida. ¡Tu casa está iluminada!")
 
-with col2:
-    if st.button('APAGAR LUZ 🌙'):
-        action = "apagar"
-        client1 = paho.Client("AlejoInterfaces")
-        client1.on_publish = on_publish
-        client1.connect(broker, port)
-        message = json.dumps({"gesto": action})
-        client1.publish("AlejoCerradura", message)
-        st.warning("Luz apagada. Tu casa está en modo descanso.")
+with col_center:
+    col_button1, col_button2 = st.columns(2)
+    with col_button1:
+        if st.button('ENCENDER LUZ 🔆'):
+            action = "encender"
+            client1 = paho.Client("AlejoInterfaces")
+            client1.on_publish = on_publish
+            client1.connect(broker, port)
+            message = json.dumps({"gesto": action})
+            client1.publish("AlejoCerradura", message)
+            st.success("Luz encendida. ¡Tu casa está iluminada!")
+
+    with col_button2:
+        if st.button('APAGAR LUZ 🌙'):
+            action = "apagar"
+            client1 = paho.Client("AlejoInterfaces")
+            client1.on_publish = on_publish
+            client1.connect(broker, port)
+            message = json.dumps({"gesto": action})
+            client1.publish("AlejoCerradura", message)
+            st.warning("Luz apagada. Tu casa está en modo descanso.")
