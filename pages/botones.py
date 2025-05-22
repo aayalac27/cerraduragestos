@@ -23,7 +23,7 @@ def on_message(client, userdata, message):
         
 
 
-broker="157.230.214.127"
+broker="broker.hivemq.com"
 port=1883
 client1= paho.Client("AlejoInterfaces")
 client1.on_message = on_message
@@ -33,11 +33,11 @@ client1.on_message = on_message
 st.title("MQTT Control")
 
 if st.button('ON'):
-    act1="ON"
-    client1= paho.Client("GIT-HUB")                           
+    act1="Abre"
+    client1= paho.Client("AlejoInterfaces")                           
     client1.on_publish = on_publish                          
     client1.connect(broker,port)  
-    message =json.dumps({"Act1":act1})
+    message =json.dumps({"AlejoCerradura":act1})
     ret= client1.publish("cmqtt_s", message)
  
     #client1.subscribe("Sensores")
@@ -47,11 +47,11 @@ else:
     st.write('')
 
 if st.button('OFF'):
-    act1="OFF"
-    client1= paho.Client("GIT-HUB")                           
+    act1="Cierra"
+    client1= paho.Client("AlejoInterfaces")                           
     client1.on_publish = on_publish                          
     client1.connect(broker,port)  
-    message =json.dumps({"Act1":act1})
+    message =json.dumps({"AlejoCerradura":act1})
     ret= client1.publish("cmqtt_s", message)
   
     
