@@ -9,6 +9,11 @@ from keras.models import load_model
 # ---------- ESTILOS CSS ----------
 st.markdown("""
     <style>
+        /* Fondo general de la página */
+        body, .stApp {
+            background: linear-gradient(to bottom right, #e0f7fa, #ffffff);
+        }
+
         .main-title {
             font-size: 40px;
             font-weight: bold;
@@ -19,28 +24,39 @@ st.markdown("""
             border-radius: 10px;
             margin-bottom: 30px;
         }
+
         .intro-text {
             font-size: 18px;
             color: #333;
             text-align: center;
-            margin-bottom: 20px;
+            margin-bottom: 30px;
         }
+
         .gesture-box {
-            border: 2px solid #2C5364;
-            border-radius: 10px;
-            padding: 15px;
+            border: none;
+            border-radius: 15px;
+            padding: 20px;
             margin: 10px;
-            background-color: #f0f4f8;
+            background: linear-gradient(145deg, #b3e5fc, #e1f5fe);
+            box-shadow: 4px 4px 10px rgba(0,0,0,0.1);
             text-align: center;
             font-size: 18px;
+            transition: transform 0.2s;
         }
+
+        .gesture-box:hover {
+            transform: scale(1.02);
+        }
+
         .gesture-emoji {
-            font-size: 40px;
+            font-size: 45px;
+            margin-bottom: 10px;
         }
+
         .stButton>button {
             background-color: #2C5364;
             color: white;
-            border: None;
+            border: none;
             border-radius: 10px;
             padding: 10px 20px;
         }
@@ -54,10 +70,9 @@ st.markdown('<div class="intro-text">Este sistema utiliza visión por computador
 # ---------- GESTOS EXPLICATIVOS ----------
 col1, col2 = st.columns(2)
 with col1:
-    st.markdown('<div class="gesture-box"><div class="gesture-emoji">✊</div><br>Gesto para <strong>cerrar</strong> la cerradura</div>', unsafe_allow_html=True)
-
+    st.markdown('<div class="gesture-box"><div class="gesture-emoji">✊</div>Gesto para <strong>cerrar</strong> la cerradura</div>', unsafe_allow_html=True)
 with col2:
-    st.markdown('<div class="gesture-box"><div class="gesture-emoji">🤚</div><br>Gesto para <strong>abrir</strong> la cerradura</div>', unsafe_allow_html=True)
+    st.markdown('<div class="gesture-box"><div class="gesture-emoji">🤚</div>Gesto para <strong>abrir</strong> la cerradura</div>', unsafe_allow_html=True)
 
 # ---------- MQTT Y MODELO ----------
 def on_publish(client, userdata, result):
@@ -92,7 +107,7 @@ if img_file_buffer is not None:
 
     prediction = model.predict(data)
     print(prediction)
-    
+
     if prediction[0][0] > 0.3:
         st.header("🔓 Abriendo Cerradura")
         client1.publish("AlejoCerradura", json.dumps({"gesto": "Abre"}), qos=0, retain=False)
