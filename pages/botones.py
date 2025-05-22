@@ -55,7 +55,7 @@ st.markdown("""
 st.markdown('<div class="main-title">Control de Iluminación del Hogar 🏠💡</div>', unsafe_allow_html=True)
 
 # ---------- VERSIÓN DE PYTHON ----------
-st.markdown(f'<div class="info-box">Sistema funcionando con Python <strong>{platform.python_version()}</strong>. Controla la luz principal de tu casa en tiempo real.</div>', unsafe_allow_html=True)
+st.markdown(f'<div class="info-box">Controla la luz principal de tu casa en tiempo real.</div>', unsafe_allow_html=True)
 
 # ---------- CONFIGURACIÓN MQTT ----------
 def on_publish(client, userdata, result):
