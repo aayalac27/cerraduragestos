@@ -56,9 +56,9 @@ if img_file_buffer is not None:
     print(prediction)
     if prediction[0][0]>0.3:
       st.header('cerrando')
-      client1.publish("AlejoCerradura","{'gesto': 'Abre'}",qos=0, retain=False)
+      client1.publish("AlejoCerradura","{'gesto': 'Cierra'}",qos=0, retain=False)
       time.sleep(0.2)
     if prediction[0][1]>0.3:
       st.header('abriendo')
-      client1.publish("AlejoCerradura","{'gesto': 'Cierra'}",qos=0, retain=False)
+      client1.publish("AlejoCerradura","{'gesto': 'Abre'}",qos=0, retain=False)
       time.sleep(0.2)  
