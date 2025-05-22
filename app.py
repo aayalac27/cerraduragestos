@@ -76,8 +76,7 @@ if img_file_buffer is not None:
     data[0] = normalized_image_array
 
     prediction = model.predict(data)
-    st.write("Predicción:", prediction)
-
+    print(prediction)
     if prediction[0][0] > 0.3:
         st.header("🔓 Abriendo Cerradura")
         client1.publish("AlejoCerradura", json.dumps({"gesto": "Abre"}), qos=0, retain=False)
