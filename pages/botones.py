@@ -33,7 +33,7 @@ client1.on_message = on_message
 st.title("MQTT Control")
 
 if st.button('ON'):
-    act1="Abre"
+    act1="encender"
     client1= paho.Client("AlejoInterfaces")                           
     client1.on_publish = on_publish                          
     client1.connect(broker,port)  
@@ -47,7 +47,7 @@ else:
     st.write('')
 
 if st.button('OFF'):
-    act1="Cierra"
+    act1="apagar"
     client1= paho.Client("AlejoInterfaces")                           
     client1.on_publish = on_publish                          
     client1.connect(broker,port)  
